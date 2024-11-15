@@ -1,0 +1,24 @@
+a) **Situation** : Vous êtes en train de comparer les prix de trois produits différents avant de faire un achat. Écrivez un algorithme qui permet à un utilisateur de saisir les prix de ces trois produits et détermine lequel est le plus élevé.
+
+1. Algorithmique
+a) Comparaison des prix de trois produits
+Algorithme :
+
+Demander à l'utilisateur de saisir le prix du premier produit.
+Demander à l'utilisateur de saisir le prix du deuxième produit.
+Demander à l'utilisateur de saisir le prix du troisième produit.
+Comparer les trois prix pour déterminer le plus élevé.
+Afficher le prix le plus élevé.
+b) Estimation du budget total
+Algorithme :
+
+Demander à l'utilisateur de saisir un nombre entier N (nombre de participants).
+Initialiser une variable somme à 0.
+Pour chaque entier i de 1 à N, ajouter i à somme.
+Afficher la somme totale.
+c) Vérification de la parité
+Algorithme :
+
+Demander à l'utilisateur de saisir un nombre entier.
+Vérifier si le nombre est divisible par 2.
+Si oui, afficher que le nombre est pair ; sinon, afficher qu'il est impair.
