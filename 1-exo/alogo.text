@@ -22,3 +22,26 @@ Algorithme :
 Demander à l'utilisateur de saisir un nombre entier.
 Vérifier si le nombre est divisible par 2.
 Si oui, afficher que le nombre est pair ; sinon, afficher qu'il est impair.
+1. Algorithmique
+a) Comparaison des prix de trois produits
+Algorithme :
+
+Début
+Déclaration des variables :
+prix1, prix2, prix3 : flottants
+prix_max : flottant
+Afficher "Entrez le prix du premier produit :"
+Lire prix1
+Afficher "Entrez le prix du deuxième produit :"
+Lire prix2
+Afficher "Entrez le prix du troisième produit :"
+Lire prix3
+Initialiser prix_max à prix1
+Si prix2 > prix_max alors
+prix_max = prix2
+Fin Si
+Si prix3 > prix_max alors
+prix_max = prix3
+Fin Si
+Afficher "Le prix le plus élevé est : ", prix_max
+Fin
