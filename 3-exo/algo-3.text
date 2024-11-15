@@ -1,0 +1,14 @@
+c) Vérification de la parité
+Algorithme :
+
+Début
+Déclaration des variables :
+nombre : entier
+Afficher "Entrez un nombre entier :"
+Lire nombre
+Si nombre % 2 == 0 alors
+Afficher "Le nombre est pair."
+Sinon
+Afficher "Le nombre est impair."
+Fin Si
+Fin
