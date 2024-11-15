@@ -1,35 +1,47 @@
+<?php
+require_once 'config.php';
+require_once 'functions.php';
+?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-  <title>ElectroMarket - Accueil</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroMarket</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <h1>ElectroMarket</h1>
-    <nav>
-      <ul>
-        <li><a href="index.php">Accueil</a></li>
-        <li><a href="clients.php">Clients</a></li>
-        <li><a href="commandes.php">Commandes</a></li>
-        <li><a href="paiements.php">Paiements</a></li>
-      </ul>
-    </nav>
-  </header>
+  <?php include 'header.php'; ?>
 
   <main>
-    <h2>Bienvenue sur ElectroMarket !</h2>
-    <p>Gérez facilement vos commandes, clients et paiements en ligne.</p>
-    <a href="clients.php" class="btn">Voir les clients</a>
-    <a href="commandes.php" class="btn">Voir les commandes</a>
-    <a href="paiements.php" class="btn">Voir les paiements</a>
+    <section class="hero">
+      <h1>Bienvenue sur ElectroMarket</h1>
+      <p>Découvrez notre large gamme de produits électroniques</p>
+      <a href="#" class="btn">Voir les produits</a>
+    </section>
+
+    <section class="featured-products">
+      <h2>Nos produits phares</h2>
+      <div class="product-grid">
+        <?php
+                $featured_products = getFeaturedProducts($conn);
+                foreach ($featured_products as $product) {
+                    echo "<div class='product-card'>";
+                    echo "<img src='" . $product['image'] . "' alt='" . $product['nom'] . "'>";
+                    echo "<h3>" . $product['nom'] . "</h3>";
+                    echo "<p>" . $product['description'] . "</p>";
+                    echo "<p>Prix: " . $product['prix'] . " €</p>";
+                    echo "<a href='product.php?id=" . $product['id'] . "' class='btn'>Voir le produit</a>";
+                    echo "</div>";
+                }
+                ?>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2023 ElectroMarket. Tous droits réservés.</p>
-  </footer>
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>

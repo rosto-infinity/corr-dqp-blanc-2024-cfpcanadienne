@@ -1,68 +1,55 @@
 <?php
-require_once 'database.php';
+require_once 'config.php';
+require_once 'functions.php';
 
-// Récupération des clients
-$sql = "SELECT * FROM Clients";
-$result = $conn->query($sql);
+$clients = getClients($conn);
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clients - ElectroMarket</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <h1>Clients - ElectroMarket</h1>
-    <nav>
-      <ul>
-        <li><a href="index.php">Accueil</a></li>
-        <li><a href="clients.php">Clients</a></li>
-        <li><a href="commandes.php">Commandes</a></li>
-        <li><a href="paiements.php">Paiements</a></li>
-      </ul>
-    </nav>
-  </header>
+  <?php include 'header.php'; ?>
 
   <main>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Adresse</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+    <section class="clients">
+      <h1>Nos clients</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+                    foreach ($clients as $client) {
                         echo "<tr>";
-                        echo "<td>" . $row["ID"] . "</td>";
-                        echo "<td>" . $row["Nom"] . "</td>";
-                        echo "<td>" . $row["Adresse"] . "</td>";
-                        echo "<td>
-                                <a href='update_client.php?id=" . $row["ID"] . "'>Modifier</a>
-                                <a href='delete.php?id=" . $row["ID"] . "&type=client'>Supprimer</a>
-                            </td>";
+                        echo "<td>" . $client['nom'] . "</td>";
+                        echo "<td>" . $client['email'] . "</td>";
+                        echo "<td>" . $client['telephone'] . "</td>";
+                        echo "<td>";
+                        echo "<a href='update_client.php?id=" . $client['id'] . "' class='btn'>Modifier</a>";
+                        echo "<a href='delete.php?type=client&id=" . $client['id'] . "' class='btn btn-danger'>Supprimer</a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='4'>Aucun client trouvé.</td></tr>";
-                }
-                ?>
-      </tbody>
-    </table>
-    <a href="add_client.php" class="btn">Ajouter un client</a>
+                    ?>
+        </tbody>
+      </table>
+      <a href="add_client.php" class="btn">Ajouter un client</a>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2023 ElectroMarket. Tous droits réservés.</p>
-  </footer>
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>

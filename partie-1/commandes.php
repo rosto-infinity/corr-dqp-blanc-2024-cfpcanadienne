@@ -1,70 +1,59 @@
 <?php
-require_once 'database.php';
+require_once 'config.php';
+require_once 'functions.php';
 
-// Récupération des commandes
-$sql = "SELECT Commandes.*, Clients.Nom AS NomClient 
-        FROM Commandes 
-        JOIN Clients ON Commandes.Client_ID = Clients.ID";
-$result = $conn->query($sql);
+$commandes = getCommandes($conn);
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commandes - ElectroMarket</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <h1>Commandes - ElectroMarket</h1>
-    <nav>
-      <ul>
-        <li><a href="index.php">Accueil</a></li>
-        <li><a href="clients.php">Clients</a></li>
-        <li><a href="commandes.php">Commandes</a></li>
-        <li><a href="paiements.php">Paiements</a></li>
-      </ul>
-    </nav>
-  </header>
+  <?php include 'header.php'; ?>
 
   <main>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date</th>
-          <th>Client</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+    <section class="commandes">
+      <h1>Nos commandes</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Numéro</th>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+                    foreach ($commandes as $commande) {
                         echo "<tr>";
-                        echo "<td>" . $row["ID"] . "</td>";
-                        echo "<td>" . $row["Date"] . "</td>";
-                        echo "<td>" . $row["NomClient"] . "</td>";
-                        echo "<td>
-                                <a href='update_commande.php?id=" . $row["ID"] . "'>Modifier</a>
-                                <a href='delete.php?id=" . $row["ID"] . "&type=commande'>Supprimer</a>
-                            </td>";
+                        echo "<td>" . $commande['id'] . "</td>";
+                        echo "<td>" . getClientName($conn, $commande['client_id']) . "</td>";
+                        echo "<td>" . $commande['date'] . "</td>";
+                        echo "<td>" . $commande['total'] . " €</td>";
+                        echo "<td>" . $commande['statut'] . "</td>";
+                        echo "<td>";
+                        echo "<a href='update_commande.php?id=" . $commande['id'] . "' class='btn'>Modifier</a>";
+                        echo "<a href='delete.php?type=commande&id=" . $commande['id'] . "' class='btn btn-danger'>Supprimer</a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='4'>Aucune commande trouvée.</td></tr>";
-                }
-                ?>
-      </tbody>
-    </table>
-    <a href="add_commande.php" class="btn">Ajouter une commande</a>
+                    ?>
+        </tbody>
+      </table>
+      <a href="add_commande.php" class="btn">Ajouter une commande</a>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2023 ElectroMarket. Tous droits réservés.</p>
-  </footer>
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>
