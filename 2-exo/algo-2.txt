@@ -1,0 +1,15 @@
+b) Estimation du budget total
+Algorithme :
+
+Début
+Déclaration des variables :
+N : entier
+somme : entier
+Afficher "Entrez le nombre de participants :"
+Lire N
+Initialiser somme à 0
+Pour i de 1 à N faire
+somme = somme + i
+Fin Pour
+Afficher "Le budget total estimé est : ", somme
+Fin
